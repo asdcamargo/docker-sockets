@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Auction Control</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="/main.css"/>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#" th:href="@{/auction}">New Auction</a></li>
+            <li><a href="#" th:href="@{/form/auction}">Manage Auctions</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="panel panel-default">
+      <div class="panel-heading">Add a new Auction</div>
+      <div class="panel-body">
+        <div class="row" th:if="${msg} != null">
+          <div class="alert" th:classappend="${msg.type.value}">
+            <b th:text="${msg.message}"></b>
+          </div>
+        </div>
+        <div th:include="this :: content" />
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

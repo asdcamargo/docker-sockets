@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="fragments/layout :: page">
+<body>
+<div th:fragment="content">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Good</th>
+            <th>Min. Prize</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Running</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="auctions : ${list}">
+            <td th:text="${auctions.id}"></td>
+            <td th:text="${auctions.good}"></td>
+            <td th:text="${auctions.minimumBid}"></td>
+            <td th:text="${auctions.startTime}"></td>
+            <td th:text="${auctions.endTime}"></td>
+            <td><i class="glyphicon" th:classappend="${auctions.running} ? glyphicon-ok : glyphicon-remove"></i></td>
+            <td>
+            <form th:action="@{/form/auction}" th:method="put" action="#">
+                <input type="hidden" th:name="id" th:value="${auctions.id}"/>
+                <button class="btn btn-success"><i class="glyphicon glyphicon-circle-arrow-right"></i></button>
+            </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

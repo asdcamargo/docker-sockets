@@ -1,0 +1,16 @@
+version: "2"
+
+services:
+
+  webserver:
+    build:
+      context: ./docker
+    image: docker-socket-frontend
+    # mount point for application in tomcat
+    volumes:
+      - ./app:/usr/local/tomcat/webapps/docker-socket-frontend
+    # open ports for tomcat and remote debugging
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+    restart: always

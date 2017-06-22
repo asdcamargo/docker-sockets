@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="fragments/layout :: page">
+<body>
+<div th:fragment="content">
+    <form action="#" th:action="@{/form/auction}" th:object="${auction}" method="post" data-toggle="validator"
+          role="form">
+        <div class="form-group row">
+            <label for="good" class="col-sm-2">Good:</label>
+            <div class="col-md-4">
+                <input id="good" type="text" class="form-control" th:field="*{good}" required="true"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="minPrice" class="col-sm-2 col-form-label">Minimum Bid:</label>
+            <div class="col-md-4">
+                <input id="minPrice" type="number" th:field="*{minimumBid}" value="" class="form-control" required="true"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="startDate" class="col-sm-2 col-form-label">Start Date:</label>
+            <div class="col-md-4">
+                <input id="startDate" type="date" th:field="*{startTime}" class="datepicker form-control"
+                       required="true"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="endDate" class="col-sm-2 col-form-label">End Date:</label>
+            <div class="col-md-4">
+                <input id="endDate" type="date" th:field="*{endTime}" class="datepicker form-control" required="true"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2 col-form-label">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
