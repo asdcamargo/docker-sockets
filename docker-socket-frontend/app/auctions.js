@@ -1,5 +1,5 @@
 var auctionId;
-var backendUrl = 'http://192.168.1.161:8080';
+var backendUrl = 'http://192.168.0.8:8080';
 
 $(function() {
   waitingDialog.show('...Loading auctions', {
