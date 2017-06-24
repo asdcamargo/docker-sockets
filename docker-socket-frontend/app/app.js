@@ -1,9 +1,9 @@
 var stompClient = null;
 var highestBid = 0;
 var auctionData;
-var backendUrl = 'http://192.168.1.161:8080';
 
 $(function() {
+  var backendUrl = localStorage.getItem('backendUrl');
   var socket = new SockJS(backendUrl + '/simple-auction');
   stompClient = Stomp.over(socket);
   stompClient.connect({}, function(frame) {
@@ -33,7 +33,7 @@ function updateAuctionDetails(auction) {
   $('#good').text(auction.good);
 
   addUser(auction);
-  if(auction.highestBid.user != null) {
+  if (auction.highestBid.user != null) {
     highestBid = auction.highestBid.value;
     updateHighThrow(auction.highestBid);
   }
@@ -69,10 +69,15 @@ function sendBid() {
 
 function addUser(users) {
   $("#users").empty();
-  for (idx in users.participants) {
-    $("#users").append("<tr><td>" + users.participants[idx] + "</td></tr>");
-  }
+  users.participants.forEach(function(user) {
+    var row = "<tr id='" + user + "'><td>" + user + "</td></tr>";
+    $("#users").append(row);
+    if (user == auctionData.name) {
+      $('#' + user).addClass('user-selected');
+    }
+  });
 }
+
 
 function updateHighThrow(userThrow) {
   $("#high-bid").empty();
@@ -80,11 +85,36 @@ function updateHighThrow(userThrow) {
   $("#bid").focus();
   $("#high-bid").append(userThrow.value + " by " + userThrow.user + " on " + userThrow
     .dateStr);
+
+  animatePanelAfterUpdate($('#throwpanel'));
+
+}
+
+function animateToColor(element, color) {
+  element.animate({
+    borderBottomColor: color,
+    borderLeftColor: color,
+    borderRightColor: color,
+    borderTopColor: color
+  });
 }
 
 function addThrow(userThrow) {
-  $("#bids").prepend("<tr><td>" + userThrow.user + "</td><td>" + userThrow.value + "</td><td>" + userThrow
-    .dateStr + "</td></tr>");
+  var rowId = userThrow.user + userThrow.value;
+  var row = "<tr id='" + rowId + "'><td>" + userThrow.user + "</td><td>" + userThrow.value + "</td><td>" + userThrow
+    .dateStr + "</td></tr>";
+  $("#bids").prepend(row);
+  if (highestBid == userThrow.value) {
+    $("#" + rowId).addClass('winning-throw').siblings().removeClass('winning-throw');
+  }
+  animatePanelAfterUpdate($('#throwlist'));
+}
+
+function animatePanelAfterUpdate(panel) {
+  animateToColor(panel, 'green');
+  setTimeout(function() {
+    animateToColor(panel, 'rgb(221,221,221)');
+  }, 1000);
 }
 
 $(function() {

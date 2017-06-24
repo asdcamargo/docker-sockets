@@ -5,6 +5,7 @@
   <title>Simple Auction App with Sockets! :)</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" crossorigin="anonymous"></script>
   <script src="resources/scripts/sockjs.min.js"></script>
   <script src="resources/scripts/stomp.min.js"></script>
   <script src="resources/scripts/bootstrap-waitingfor.min.js"></script>
@@ -17,6 +18,12 @@
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
+    }
+    .user-selected {
+      background: rgb(79, 120, 176) !important;
+    }
+    .winning-throw {
+      background: rgb(153, 179, 0) !important;
     }
   </style>
 </head>
@@ -58,7 +65,7 @@
         </div>
       </div>
       <div class="col-md-4 row-eq-height">
-        <div class="panel panel-default col-md-12">
+        <div id="throwpanel" class="panel panel-default col-md-12">
           <div class="panel-heading">
             <h3>Do a Throw</h3>
           </div>
@@ -86,7 +93,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <div class="panel panel-default col-md-12">
+        <div id="throwlist" class="panel panel-default col-md-12">
           <div class="panel-heading">
             <h3>Throws</h3>
           </div>
